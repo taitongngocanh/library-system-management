@@ -52,3 +52,8 @@
     pointer-events: none;
     cursor: default;
 }
+
+/* Home page */
+.btn-explore:hover {
+    border: solid 1px #FFFF;
+}
