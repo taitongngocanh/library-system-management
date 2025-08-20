@@ -51,7 +51,7 @@ export const Heros = () => {
                          </div>
 
                          <div className="m-2">
-                              <div className="col-image"></div>
+                              <div className="col-image-right"></div>
                               <div className="mt-2">
                                    <h1>蔵書はいつも新しくなっています！</h1>
                                    <p className="lead">
