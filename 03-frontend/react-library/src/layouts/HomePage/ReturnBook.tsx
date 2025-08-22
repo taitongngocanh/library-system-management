@@ -8,7 +8,7 @@ export const ReturnBook = () => {
                          alt="book" width="151" height="233" />
                     <h6 className="mt-2">本</h6>
                     <p>プログラミングが大好き.</p>
-                    <a href="#" className="btn main-color text-white reserve-btn">予約</a>
+                    <a href="#" className="btn main-color text-white">予約</a>
                </div>
           </div>
      );
