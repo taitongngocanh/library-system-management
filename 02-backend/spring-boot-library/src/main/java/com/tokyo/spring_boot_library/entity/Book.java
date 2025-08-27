@@ -21,7 +21,7 @@ public class Book {
     private String description;
     @Column(name = "copies")
     private int copies;
-    @Column(name = "copies_Available")
+    @Column(name = "copies_available")
     private int copiesAvailable;
     @Column(name = "category")
     private String category;
