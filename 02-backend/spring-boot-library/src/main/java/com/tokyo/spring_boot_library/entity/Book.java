@@ -1,17 +1,16 @@
 package com.tokyo.spring_boot_library.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
 import lombok.Data;
 import jakarta.persistence.*;
+import lombok.Generated;
 
 @Entity
 @Table(name = "book")
 @Data
 public class Book {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     @Column(name = "id")
     private Long id;
     @Column(name = "title")
