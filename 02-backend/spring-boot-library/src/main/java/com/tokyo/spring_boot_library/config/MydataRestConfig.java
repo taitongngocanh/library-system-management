@@ -13,7 +13,9 @@ public class MydataRestConfig implements RepositoryRestConfigurer {
 
     @Override
     public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config, CorsRegistry cors) {
-        HttpMethod[] theUnsupportedActions = {HttpMethod.POST, HttpMethod.PATCH, HttpMethod.DELETE, HttpMethod.PUT};
+        HttpMethod[] theUnsupportedActions = {
+                HttpMethod.POST, HttpMethod.PUT, HttpMethod.PATCH, HttpMethod.DELETE
+        };
 
         config.exposeIdsFor(Book.class);
 
@@ -24,8 +26,8 @@ public class MydataRestConfig implements RepositoryRestConfigurer {
                 .allowedOrigins(theAllowedOrigins);
     }
 
-    private void disableHttpMethods(Class theClass, RepositoryRestConfiguration config,
-                                    HttpMethod[] theUnsupportedActions) {
+    public void disableHttpMethods(Class theClass, RepositoryRestConfiguration config,
+                                   HttpMethod [] theUnsupportedActions) {
         config.getExposureConfiguration()
                 .forDomainType(theClass)
                 .withItemExposure((metdata, httpMethods) ->
