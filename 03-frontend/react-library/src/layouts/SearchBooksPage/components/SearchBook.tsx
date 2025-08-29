@@ -14,6 +14,15 @@ export const SearchBook: React.FC<{ book: BookModel }> = (props) => {
                               }
                          </div>
                     </div>
+                    
+                    <div className="d-lg-none d-flex justify-content-center align-items-center">
+                         {
+                                   props.book.img ?
+                                        <img src={props.book.img} width={123} height={196} alt="Book"></img>
+                                        :
+                                        <img src={require('../../../Images/BooksImages/book-luv2code-1000.png')} width={123} height={196} alt="Book"></img>
+                              }
+                    </div>
 
                     <div className="col-md-6">
                          <div className="card-body">
@@ -33,7 +42,7 @@ export const SearchBook: React.FC<{ book: BookModel }> = (props) => {
                     </div>
 
                     <div className="col-md-4 d-flex justify-content-center align-items-center">
-                              <a href="" className="btn btn-md main-color text-white">
+                              <a href="" className="btn btn-md main-color text-white reserve-btn">
                                    View Details
                               </a>
                     </div>
