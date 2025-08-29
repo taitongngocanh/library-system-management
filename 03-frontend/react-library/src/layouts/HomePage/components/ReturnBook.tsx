@@ -16,7 +16,7 @@ export const ReturnBook: React.FC<{book: BookModel}> = (props) => {
                     
                     <h6 className="mt-2">{props.book.title}</h6>
                     <p>{props.book.author}</p>
-                    <a href="#" className="btn main-color text-white">予約</a>
+                    <a href="#" className="btn main-color text-white reserve-btn" >予約</a>
                </div>
           </div>
      );
