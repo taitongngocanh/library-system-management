@@ -9,10 +9,10 @@ export const SearchBooksPage = () => {
      const [books, setBooks] = useState<BookModel[]>([]);
      const [isLoading, setIsLoading] = useState(true);
      const [httpError, setHttpError] = useState(null);
-     const [currentPage, setCurrentPage] = useState(1);
-     const [bookPerPage] = useState(5);
-     const [totalAmountOfBooks, setTotalAmountOfBooks] = useState(0);
-     const [totalPages, setTotalPages] = useState(0);
+     const [currentPage, setCurrentPage] = useState(1); // the current page, default is 1
+     const [bookPerPage] = useState(5); // the number of book display on 1 page
+     const [totalAmountOfBooks, setTotalAmountOfBooks] = useState(0); // the total of book in system
+     const [totalPages, setTotalPages] = useState(0); // the total of page
 
      useEffect(() => {
           const fetchBooks = async () => {
@@ -54,7 +54,8 @@ export const SearchBooksPage = () => {
                setIsLoading(false);
                setHttpError(error.message);
           })
-     }, []);
+          window.scrollTo(0, 0);
+     }, [currentPage]);
 
      if (isLoading) {
           return (
@@ -76,7 +77,6 @@ export const SearchBooksPage = () => {
      const indexOfFirstBook: number = indexOfLastBook - bookPerPage;
      let lastItem = bookPerPage * currentPage <= totalAmountOfBooks ? bookPerPage : totalAmountOfBooks;
      const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
-
 
      return (
           <div>
@@ -133,12 +133,12 @@ export const SearchBooksPage = () => {
 
                          <div className="mt-3">
                               <h5>
-                                   Number of results: (22)
+                                   Number of results: ({totalAmountOfBooks})
                               </h5>
                          </div>
 
                          <p>
-                              1 to 5 of 22 items:
+                              {indexOfFirstBook + 1} to {lastItem} of {totalAmountOfBooks} items:
                          </p>
 
                          {books.map(book => (
