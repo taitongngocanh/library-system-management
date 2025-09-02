@@ -2,17 +2,22 @@ import { useEffect, useState } from "react";
 import BookModel from "../../models/BookModel";
 import { SpinnerLoading } from "../Utils/SpinnerLoading";
 import { SearchBook } from "./components/SearchBook";
+import { Pagination } from "../Utils/Pagination";
 
 export const SearchBooksPage = () => {
 
      const [books, setBooks] = useState<BookModel[]>([]);
      const [isLoading, setIsLoading] = useState(true);
      const [httpError, setHttpError] = useState(null);
+     const [currentPage, setCurrentPage] = useState(1);
+     const [bookPerPage] = useState(5);
+     const [totalAmountOfBooks, setTotalAmountOfBooks] = useState(0);
+     const [totalPages, setTotalPages] = useState(0);
 
      useEffect(() => {
           const fetchBooks = async () => {
                const baseUrl: string = "http://localhost:8080/api/books";
-               const url: string = `${baseUrl}?page=0&size=5`;
+               const url: string = `${baseUrl}?page=${currentPage - 1}&size=${bookPerPage}`;
                const response = await fetch(url);
 
                if (!response.ok) {
@@ -22,6 +27,9 @@ export const SearchBooksPage = () => {
                const responseJson = await response.json();
 
                const responseData = await responseJson._embedded.books;
+
+               setTotalAmountOfBooks(responseJson.page.totalElements);
+               setTotalPages(responseJson.page.totalPages);
 
                const loadedBooks: BookModel[] = [];
 
@@ -63,6 +71,12 @@ export const SearchBooksPage = () => {
                </div>
           );
      }
+
+     const indexOfLastBook: number = currentPage * bookPerPage;
+     const indexOfFirstBook: number = indexOfLastBook - bookPerPage;
+     let lastItem = bookPerPage * currentPage <= totalAmountOfBooks ? bookPerPage : totalAmountOfBooks;
+     const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+
 
      return (
           <div>
@@ -130,6 +144,11 @@ export const SearchBooksPage = () => {
                          {books.map(book => (
                               <SearchBook book={book} key={book.id}/>
                          ))}
+
+                         {
+                              totalPages > 1 && 
+                              <Pagination currentPage={currentPage} totalPages={totalPages} paginate={paginate}/>
+                         }
                     </div>
                </div>
           </div>
