@@ -15,6 +15,7 @@ export const SearchBooksPage = () => {
      const [totalPages, setTotalPages] = useState(0); // the total of page
      const [search, setSearch] = useState("");
      const [searchUrl, setSearchUrl] = useState("");
+     const [categorySelection, setCategorySelection] = useState("Book category");
 
      useEffect(() => {
           const fetchBooks = async () => {
@@ -90,6 +91,21 @@ export const SearchBooksPage = () => {
           }
      }
 
+     const categoryFiled = (value: string) => {
+          if (
+               value.toLowerCase() === 'fe' ||
+               value.toLowerCase() === 'be' ||
+               value.toLowerCase() === 'data' ||
+               value.toLowerCase() === 'devops'
+          ) {
+               setCategorySelection(value);
+               setSearchUrl(`/search/findByCategory?category=${value}&page=0&size=${bookPerPage}`)
+          } else {
+               setCategorySelection("All");
+               setSearchUrl(`?page=0&size=${bookPerPage}`);
+          }
+     }
+
      const indexOfLastBook: number = currentPage * bookPerPage;
      const indexOfFirstBook: number = indexOfLastBook - bookPerPage;
      let lastItem = bookPerPage * currentPage <= totalAmountOfBooks ? bookPerPage : totalAmountOfBooks;
@@ -114,32 +130,32 @@ export const SearchBooksPage = () => {
                               <div className="col-4">
                                    <div className="dropdown">
                                         <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
-                                             data-bs-toggle="dropdown" aria-expanded="false">
-                                             Category
+                                             data-bs-toggle="dropdown" aria-expanded="false" >
+                                             {categorySelection}
                                         </button>
 
                                         <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                             <li>
+                                             <li onClick={() => categoryFiled("All")}>
                                                   <a className="dropdown-item" href="#">
                                                        All
                                                   </a>
                                              </li>
-                                             <li>
+                                             <li onClick={() => categoryFiled("Fe")}>
                                                   <a className="dropdown-item" href="#">
                                                        Front End
                                                   </a>
                                              </li>
-                                             <li>
+                                             <li onClick={() => categoryFiled("Be")}>
                                                   <a className="dropdown-item" href="#">
                                                        Back End
                                                   </a>
                                              </li>
-                                             <li>
+                                             <li onClick={() => categoryFiled("Data")}>
                                                   <a className="dropdown-item" href="#">
                                                        Data
                                                   </a>
                                              </li>
-                                             <li>
+                                             <li onClick={() => categoryFiled("Devops")}>
                                                   <a className="dropdown-item" href="#">
                                                        DevOps
                                                   </a>
