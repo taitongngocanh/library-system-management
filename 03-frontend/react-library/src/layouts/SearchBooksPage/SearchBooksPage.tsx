@@ -20,7 +20,7 @@ export const SearchBooksPage = () => {
           const fetchBooks = async () => {
                const baseUrl: string = "http://localhost:8080/api/books";
                let url: string = '';
-               
+
                if (searchUrl === '') {
                     url = `${baseUrl}?page=${currentPage - 1}&size=${bookPerPage}`;
                } else {
@@ -32,7 +32,7 @@ export const SearchBooksPage = () => {
                if (!response.ok) {
                     throw new Error("Something went wrong!");
                }
-               
+
                const responseJson = await response.json();
 
                const responseData = await responseJson._embedded.books;
@@ -68,7 +68,7 @@ export const SearchBooksPage = () => {
 
      if (isLoading) {
           return (
-               <SpinnerLoading/>
+               <SpinnerLoading />
           );
      }
 
@@ -103,9 +103,9 @@ export const SearchBooksPage = () => {
                               <div className="col-6">
                                    <div className="d-flex">
                                         <input className="form-control me-2" type="search"
-                                        placeholder="Search" aria-labelledby="Search"
-                                        onChange={e => setSearch(e.target.value)}/>
-                                        <button className="btn btn-outline-success" onClick={() => searchhHandleChange()}> 
+                                             placeholder="Search" aria-labelledby="Search"
+                                             onChange={e => setSearch(e.target.value)} />
+                                        <button className="btn btn-outline-success" onClick={() => searchhHandleChange()}>
                                              Search
                                         </button>
                                    </div>
@@ -114,7 +114,7 @@ export const SearchBooksPage = () => {
                               <div className="col-4">
                                    <div className="dropdown">
                                         <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                             data-bs-toggle="dropdown" aria-expanded="false">
                                              Category
                                         </button>
 
@@ -149,23 +149,36 @@ export const SearchBooksPage = () => {
                               </div>
                          </div>
 
-                         <div className="mt-3">
-                              <h5>
-                                   Number of results: ({totalAmountOfBooks})
-                              </h5>
-                         </div>
+                         {totalAmountOfBooks > 0 ?
+                              <>
+                                   <div className="mt-3">
+                                        <h5>
+                                             Number of results: ({totalAmountOfBooks})
+                                        </h5>
+                                   </div>
 
-                         <p>
-                              {indexOfFirstBook + 1} to {lastItem} of {totalAmountOfBooks} items:
-                         </p>
+                                   <p>
+                                        {indexOfFirstBook + 1} to {lastItem} of {totalAmountOfBooks} items:
+                                   </p>
 
-                         {books.map(book => (
-                              <SearchBook book={book} key={book.id}/>
-                         ))}
+                                   {books.map(book => (
+                                        <SearchBook book={book} key={book.id} />
+                                   ))}
+                              </>
+                              :
+                              <div className="m-5">
+                                   <h3>
+                                        Can't find what you are looking for?
+                                   </h3>
+                                   <a type="button" className="btn main-color btn-md px-4 me-md-2 fw-bold text-white reserve-btn" href="#">
+                                        Library Services
+                                   </a>
+                              </div>
+                         }
 
                          {
-                              totalPages > 1 && 
-                              <Pagination currentPage={currentPage} totalPages={totalPages} paginate={paginate}/>
+                              totalPages > 1 &&
+                              <Pagination currentPage={currentPage} totalPages={totalPages} paginate={paginate} />
                          }
                     </div>
                </div>
