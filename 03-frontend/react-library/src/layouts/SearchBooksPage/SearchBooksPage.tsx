@@ -13,17 +13,26 @@ export const SearchBooksPage = () => {
      const [bookPerPage] = useState(5); // the number of book display on 1 page
      const [totalAmountOfBooks, setTotalAmountOfBooks] = useState(0); // the total of book in system
      const [totalPages, setTotalPages] = useState(0); // the total of page
+     const [search, setSearch] = useState("");
+     const [searchUrl, setSearchUrl] = useState("");
 
      useEffect(() => {
           const fetchBooks = async () => {
                const baseUrl: string = "http://localhost:8080/api/books";
-               const url: string = `${baseUrl}?page=${currentPage - 1}&size=${bookPerPage}`;
+               let url: string = '';
+               
+               if (searchUrl === '') {
+                    url = `${baseUrl}?page=${currentPage - 1}&size=${bookPerPage}`;
+               } else {
+                    url = baseUrl + searchUrl;
+               }
+
                const response = await fetch(url);
 
                if (!response.ok) {
                     throw new Error("Something went wrong!");
                }
-
+               
                const responseJson = await response.json();
 
                const responseData = await responseJson._embedded.books;
@@ -55,7 +64,7 @@ export const SearchBooksPage = () => {
                setHttpError(error.message);
           })
           window.scrollTo(0, 0);
-     }, [currentPage]);
+     }, [currentPage, searchUrl]);
 
      if (isLoading) {
           return (
@@ -73,6 +82,14 @@ export const SearchBooksPage = () => {
           );
      }
 
+     const searchhHandleChange = () => {
+          if (search == "") {
+               setSearchUrl("");
+          } else {
+               setSearchUrl(`/search/findByTitleContaining?title=${search}&page=0&size=${bookPerPage}`)
+          }
+     }
+
      const indexOfLastBook: number = currentPage * bookPerPage;
      const indexOfFirstBook: number = indexOfLastBook - bookPerPage;
      let lastItem = bookPerPage * currentPage <= totalAmountOfBooks ? bookPerPage : totalAmountOfBooks;
@@ -86,8 +103,9 @@ export const SearchBooksPage = () => {
                               <div className="col-6">
                                    <div className="d-flex">
                                         <input className="form-control me-2" type="search"
-                                        placeholder="Search" aria-labelledby="Search"/>
-                                        <button className="btn btn-outline-success"> 
+                                        placeholder="Search" aria-labelledby="Search"
+                                        onChange={e => setSearch(e.target.value)}/>
+                                        <button className="btn btn-outline-success" onClick={() => searchhHandleChange()}> 
                                              Search
                                         </button>
                                    </div>
