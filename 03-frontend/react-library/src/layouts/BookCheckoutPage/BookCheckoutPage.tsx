@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import BookModel from "../../models/BookModel";
 import { SpinnerLoading } from "../Utils/SpinnerLoading";
+import { StarsReview } from "../Utils/StarsReview";
 
 export const BookCheckoutPage = () => {
 
@@ -86,6 +87,8 @@ export const BookCheckoutPage = () => {
                                    <p className="lead">
                                         {book?.description}
                                    </p>
+
+                                   <StarsReview Rating={4} size={32}/>
 
                               </div>
                          </div>
