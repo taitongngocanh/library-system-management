@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import BookModel from "../../models/BookModel";
 import { SpinnerLoading } from "../Utils/SpinnerLoading";
 import { StarsReview } from "../Utils/StarsReview";
+import { CheckoutAndReviewBox } from "./CheckoutAndReviewBox";
 
 export const BookCheckoutPage = () => {
 
@@ -88,45 +89,45 @@ export const BookCheckoutPage = () => {
                                         {book?.description}
                                    </p>
 
-                                   <StarsReview rating={4.5} size={32}/>
+                                   <StarsReview rating={2.5} size={32} />
 
                               </div>
                          </div>
+
+                         <CheckoutAndReviewBox book={book} mobile={false} />
                     </div>
                     <hr />
+               </div>
+
+
+               {/* Mobile */}
+
+               <div className="container d-lg-none mt-5">
+                    <div className="d-flex justify-content-center align-items-center">
+                         {
+                              book?.img ?
+                                   <img src={book?.img} width='226' height='349' alt="Book" />
+                                   :
+                                   <img src={require('./../../Images/BooksImages/book-luv2code-1000.png')}
+                                        width='226' height='349' alt="Book" />
+                         }
                     </div>
 
-
-                    {/* Mobile */}
-
-                    <div className="container d-lg-none mt-5">
-                         <div className="d-flex justify-content-center align-items-center">
-                              {
-                                   book?.img ?
-                                        <img src={book?.img} width='226' height='349' alt="Book" />
-                                        :
-                                        <img src={require('./../../Images/BooksImages/book-luv2code-1000.png')}
-                                             width='226' height='349' alt="Book" />
-                              }
+                    <div className="mt-4">
+                         <div className="ml-2">
+                              <h2>{book?.title}</h2>
+                              <h5 className="text-primary">
+                                   {book?.author}
+                              </h5>
+                              <p className="lead">
+                                   {book?.description}
+                              </p>
+                              <StarsReview rating={2.5} size={32} />
                          </div>
-
-                         <div className="mt-4">
-                              <div className="ml-2">
-                                   <h2>{book?.title}</h2>
-                                   <h5 className="text-primary">
-                                        {book?.author}
-                                   </h5>
-                                   <p className="lead">
-                                        {book?.description}
-                                   </p>
-                                   <StarsReview rating={4.5} size={32}/>
-                              </div>
-                         </div>
-
-                         <hr />
-
                     </div>
-               
+                    <CheckoutAndReviewBox book={book} mobile={true} />
+                    <hr />
+               </div>
           </div>
      );
 }
