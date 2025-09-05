@@ -88,7 +88,7 @@ export const BookCheckoutPage = () => {
                                         {book?.description}
                                    </p>
 
-                                   <StarsReview Rating={4} size={32}/>
+                                   <StarsReview rating={4.5} size={32}/>
 
                               </div>
                          </div>
@@ -97,7 +97,7 @@ export const BookCheckoutPage = () => {
                     </div>
 
 
-
+                    {/* Mobile */}
 
                     <div className="container d-lg-none mt-5">
                          <div className="d-flex justify-content-center align-items-center">
@@ -119,6 +119,7 @@ export const BookCheckoutPage = () => {
                                    <p className="lead">
                                         {book?.description}
                                    </p>
+                                   <StarsReview rating={4.5} size={32}/>
                               </div>
                          </div>
 
