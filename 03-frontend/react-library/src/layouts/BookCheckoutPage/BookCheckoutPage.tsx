@@ -96,7 +96,7 @@ export const BookCheckoutPage = () => {
                setIsLoadingReview(false);
                setHttpError(error.message);
           })
-     })
+     }, []);
 
      if (isLoading || isLoadingReview) {
           return (
