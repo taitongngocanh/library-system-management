@@ -11,11 +11,22 @@ export const LastestReviews: React.FC<{
                          <>
                               {props.reviews.slice(0, 3).map(eachReview => (
                                    <Review review={eachReview} key={eachReview.id}>
-                                        
+
                                    </Review>
                               ))}
+
+                              <div className="m-3">
+                                   <Link type="button" className="btn main-color btn-md text-white" to="#">
+                                        Reach all reviews.
+                                   </Link>
+                              </div>
                          </>
-                         
+                         :
+                         <div className="m-3">
+                              <p className="lead">
+                                   Currently there are no reviews for this book
+                              </p>
+                         </div>
                     }
                </div>
           </div>
