@@ -11,15 +11,15 @@ export const Footer = () => {
                          <div className="col-md-6">
                               <ul className="nav justify-content-end">
                                    <li className="nav-item">
-                                        <Link href="#" className="nav-link px-2 text-white" to="/home">
+                                        <Link className="nav-link px-2 text-white" to="/home">
                                              Home
                                         </Link>
                                    </li>
-                                   <Link className="nav-item" to="/search">
-                                        <a href="#" className="nav-link px-2 text-white">
+                                   <li className="nav-item">
+                                        <Link className="nav-link px-2 text-white" to="/search">
                                              Search Books
-                                        </a>
-                                   </Link>
+                                        </Link>
+                                   </li>
                               </ul>
                          </div>
                     </div>

@@ -1,4 +1,6 @@
-class ReviewModel {
+// Model should be independent from component imports
+
+export class ReviewModel {
      id: number;
      userEmail: string;
      date: string;
@@ -16,3 +18,5 @@ class ReviewModel {
                this.reviewDescription = reviewDescription;
           }
 }
+
+export {};

@@ -4,6 +4,8 @@ import { SpinnerLoading } from "../Utils/SpinnerLoading";
 import { StarsReview } from "../Utils/StarsReview";
 import { CheckoutAndReviewBox } from "./CheckoutAndReviewBox";
 import { error } from "console";
+import { LastestReviews } from "./LastestReviews";
+import { ReviewModel } from "../../models/ReviewModel";
 
 export const BookCheckoutPage = () => {
 
@@ -89,7 +91,7 @@ export const BookCheckoutPage = () => {
                }
 
                setReview(loadedReviews);
-               setIsLoading(false);
+               setIsLoadingReview(false);
           };
 
           fetchBookReviews().catch((error: any) => {
@@ -141,7 +143,7 @@ export const BookCheckoutPage = () => {
                                         {book?.description}
                                    </p>
 
-                                   <StarsReview rating={2.5} size={32} />
+                                   <StarsReview rating={totalStars} size={32} />
 
                               </div>
                          </div>
@@ -149,6 +151,7 @@ export const BookCheckoutPage = () => {
                          <CheckoutAndReviewBox book={book} mobile={false} />
                     </div>
                     <hr />
+                    <LastestReviews reviews={review} bookI={book?.id} mobile={false}/>
                </div>
 
 
@@ -174,11 +177,12 @@ export const BookCheckoutPage = () => {
                               <p className="lead">
                                    {book?.description}
                               </p>
-                              <StarsReview rating={2.5} size={32} />
+                              <StarsReview rating={totalStars} size={32} />
                          </div>
                     </div>
                     <CheckoutAndReviewBox book={book} mobile={true} />
                     <hr />
+                    <LastestReviews reviews={review} bookI={book?.id} mobile={true}/>
                </div>
           </div>
      );
